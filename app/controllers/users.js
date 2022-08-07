@@ -29,7 +29,19 @@ const findUserId = async (username) => {
   return null;
 };
 
+const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    console.log(users);
+    res.json(users);
+  }
+  catch (err) {
+    res.json({ error: 'Unable to retrieve list of all users'});
+  };
+};
+
 export {
-  addUser
+  addUser,
+  getAllUsers
 };
 
