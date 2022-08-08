@@ -32,7 +32,6 @@ const findUserId = async (username) => {
 const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find();
-    console.log(users);
     res.json(users);
   }
   catch (err) {
@@ -40,8 +39,18 @@ const getAllUsers = async (req, res, next) => {
   };
 };
 
+const findUserName = async (_id) => {
+  const userRecord = await User.findOne({ _id }).exec();
+  if (userRecord) {
+    const { username } = userRecord;
+    return username;
+  }
+  return null;
+};
+
 export {
   addUser,
-  getAllUsers
+  getAllUsers,
+  findUserName
 };
 
